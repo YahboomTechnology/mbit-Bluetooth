@@ -1,12 +1,13 @@
 {
     "name": "mbit",
-    "version": "4.0.1",
-    "description": "Extension for YahBoom m:bit V4.0.1",
+    "version": "4.0.2",
+    "description": "Extension for YahBoom m:bit V4.0.2",
     "license": "MIT",
     "dependencies": {
         "core": "*",
         "bluetooth": "*",
         "neopixel": "github:lzty634158/pxt-neopixel"
+
     },
     "files": [
         "README.md",
