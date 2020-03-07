@@ -218,12 +218,6 @@ namespace mbit {
 
         setPwm(15, 0, 0);
         setPwm(14, 0, speed2);
-
-        //pins.digitalWritePin(DigitalPin.P16, 0);
-        //pins.analogWritePin(AnalogPin.P1, speed); //速度控制
-
-        //pins.analogWritePin(AnalogPin.P0, 1023 - speed);//速度控制
-        //pins.digitalWritePin(DigitalPin.P8, 1);
     }
 
     function Car_left(speed1: number, speed2: number) {
@@ -242,12 +236,6 @@ namespace mbit {
 
         setPwm(15, 0, speed2);
         setPwm(14, 0, 0);
-
-        //pins.analogWritePin(AnalogPin.P0, speed);
-        //pins.digitalWritePin(DigitalPin.P8, 0);
-
-        //pins.digitalWritePin(DigitalPin.P16, 0);
-        //pins.digitalWritePin(DigitalPin.P1, 0);
     }
 
     function Car_right(speed1: number, speed2: number) {
@@ -266,11 +254,6 @@ namespace mbit {
 
         setPwm(15, 0, speed2);
         setPwm(14, 0, 0);
-        //pins.digitalWritePin(DigitalPin.P0, 0);
-        //pins.digitalWritePin(DigitalPin.P8, 0);
-
-        //pins.digitalWritePin(DigitalPin.P16, 1);
-       // pins.analogWritePin(AnalogPin.P1, 1023 - speed);
     }
 
     function Car_stop() {
@@ -280,10 +263,6 @@ namespace mbit {
 
         setPwm(15, 0, 0);
         setPwm(14, 0, 0);
-        //pins.digitalWritePin(DigitalPin.P0, 0);
-        //pins.digitalWritePin(DigitalPin.P8, 0);
-        //pins.digitalWritePin(DigitalPin.P16, 0);
-        //pins.digitalWritePin(DigitalPin.P1, 0);
     }
 
     function Car_spinleft(speed1: number, speed2: number) {
@@ -302,12 +281,6 @@ namespace mbit {
 
         setPwm(15, 0, speed2);
         setPwm(14, 0, 0);
-
-        //pins.analogWritePin(AnalogPin.P0, speed);
-        //pins.digitalWritePin(DigitalPin.P8, 0);
-
-        //pins.digitalWritePin(DigitalPin.P16, 0);
-        //pins.analogWritePin(AnalogPin.P1, speed);
     } 
 
     function Car_spinright(speed1: number, speed2: number) {
@@ -325,12 +298,6 @@ namespace mbit {
 
         setPwm(15, 0, 0);
         setPwm(14, 0, speed2);
-        //pins.analogWritePin(AnalogPin.P0, 1023-speed);
-        //pins.digitalWritePin(DigitalPin.P8, 1);
-
-        //pins.digitalWritePin(DigitalPin.P16, 1);
-        //pins.analogWritePin(AnalogPin.P1, 1023-speed);
-
     }
 
     /**
@@ -415,7 +382,6 @@ namespace mbit {
         setPwm(0, 0, R);
         setPwm(1, 0, G);
         setPwm(2, 0, B);
-
     }
 
     //% blockId=mbit_RGB_Car_Program block="RGB_Car_Program"
@@ -437,22 +403,15 @@ namespace mbit {
     //% blockGap=10
     export function Ultrasonic_Car(): number {
 
-        // send pulse   
-        let list:Array<number> = [0, 0, 0, 0, 0];
-        for (let i = 0; i < 5; i++) {
-            pins.setPull(DigitalPin.P14, PinPullMode.PullNone);
-		        pins.digitalWritePin(DigitalPin.P14, 0);
-		        control.waitMicros(2);
-		        pins.digitalWritePin(DigitalPin.P14, 1);
-		        control.waitMicros(15);
-		        pins.digitalWritePin(DigitalPin.P14, 0);
-		
-		        let d = pins.pulseIn(DigitalPin.P15, PulseValue.High, 43200);
-		        list[i] = Math.floor(d / 40)
-        }
-        list.sort();
-        let length = (list[1] + list[2] + list[3])/3;
-        return  Math.floor(length);
+        pins.setPull(DigitalPin.P14, PinPullMode.PullNone);
+        pins.digitalWritePin(DigitalPin.P14, 0);
+        control.waitMicros(2);
+        pins.digitalWritePin(DigitalPin.P14, 1);
+        control.waitMicros(15);
+        pins.digitalWritePin(DigitalPin.P14, 0);
+        let d = pins.pulseIn(DigitalPin.P15, PulseValue.High, 43200);
+
+        return  Math.floor(d / 40);
     }
 
     //% blockId=mbit_Music_Car block="Music_Car|%index"
@@ -578,7 +537,6 @@ namespace mbit {
             }
         }
         return temp;
-
     }
     //% blockId=mbit_CarCtrl block="CarCtrl|%index"
     //% weight=93
@@ -595,6 +553,7 @@ namespace mbit {
             case CarState.Car_SpinRight: Car_spinright(255, 255); break;
         }
     }
+
     //% blockId=mbit_CarCtrlSpeed block="CarCtrlSpeed|%index|speed %speed"
     //% weight=92
     //% blockGap=10
